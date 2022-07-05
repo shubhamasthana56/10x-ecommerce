@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userController = require("./user/routes/user");
+const multer = require("multer")();
 const app = express();
 
 //server
@@ -14,6 +15,7 @@ app.listen(3001, (err)=> {
 //body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(multer.array());
 
 //Database co
 mongoose.connect("mongodb://localhost/ecommerce", (data)=> {
