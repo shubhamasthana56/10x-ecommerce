@@ -6,6 +6,8 @@ const cartController = require("./user/routes/cart");
 const itemController = require("./user/routes/items");
 const multer = require("multer")();
 const app = express();
+require('dotenv').config()
+const cors = require("cors");
 
 //server
 app.listen(3001, (err)=> {
@@ -19,6 +21,7 @@ app.listen(3001, (err)=> {
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(multer.array());
+app.use(cors());
 
 //Database co
 mongoose.connect("mongodb://localhost/ecommerce", (data)=> {
