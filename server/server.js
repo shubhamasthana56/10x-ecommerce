@@ -6,8 +6,10 @@ const cartController = require("./user/routes/cart");
 const itemController = require("./user/routes/items");
 const multer = require("multer")();
 const app = express();
-require('dotenv').config()
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 const cors = require("cors");
+const uprotectedRoutes = ["/user/login", "/user/signup"];
 
 //server
 app.listen(3001, (err)=> {
@@ -22,6 +24,20 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(multer.array());
 app.use(cors());
+
+// app.use((req, res, next)=> {
+//     console.log(req.url);
+//     uprotectedRoutes.forEach((route)=> {
+//         if(req.url.includes(route)) {
+//             next();
+//         } else {
+//             const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY)
+//         }
+//     });
+
+//     // next()
+//     // console.log(req.headers, "from middleware");
+// });
 
 //Database co
 mongoose.connect("mongodb://localhost/ecommerce", (data)=> {

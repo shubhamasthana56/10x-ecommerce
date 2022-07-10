@@ -1,6 +1,5 @@
 const express = require("express");
 const orderModal = require("../modals/order-modal");
-const { route } = require("./user");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
@@ -10,7 +9,7 @@ router.get("/", (req, res)=> {
         const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY );
         res.status(200).send(user)
     } catch(err) {
-        res.status(403).send("User Not Authorized")
+        res.status(403).send("User Not Authorized", err)
     }
     
     

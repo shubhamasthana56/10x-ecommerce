@@ -10,9 +10,7 @@ const Login = ()=> {
             },
             data: {username: login.userName, password: login.password}
         }).then((loginData)=> {
-           localStorage.setItem("Token", "");
-           document.cookie=`authToken: ${loginData.data.authToken};`
-
+           localStorage.setItem("authorization", loginData.data.authToken);
         }).catch((err)=> {
             console.log(err)
         })
