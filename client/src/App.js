@@ -5,6 +5,7 @@ import Logout from "./components/logout/logout";
 import Orders from "./components/orders/order";
 import Protected from "./components/protected-route/protected";
 import Items from "./components/item-list/items";
+import Cart from "./components/cart/cart";
 const App = ()=> {
   return (
     <>
@@ -15,6 +16,7 @@ const App = ()=> {
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/logout" element={<Logout/>}></Route>
           <Route path="/items" element={<Items/>}></Route>
+          <Route path="/cart" element={<Cart/>}></Route>
           <Route path="/orders" element={<Protected><Orders/></Protected>}></Route>
         </Routes>
       </BrowserRouter>

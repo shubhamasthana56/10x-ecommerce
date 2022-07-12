@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./item.css";
 const Items = ()=> {
     const [items, setItems] = useState([]);
     useEffect(()=> {
@@ -15,8 +16,25 @@ const Items = ()=> {
     const handleBuy = ()=> {
 
     }
-    const handleCart = ()=> {
-
+    const handleCart = (item)=> {
+        console.log(item);
+        const payload = {
+            itemid: item.item_id
+        }
+        const authToken = localStorage.getItem("authorization");
+        //fetch(url, "")
+        fetch("http://localhost:3001/cart/add",{
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                authorization: authToken,
+                "Content-Type": "application/json"
+            }
+        }).then((data)=>data.json()).then((res)=> {
+            console.log(res)
+        }).catch((err)=> {
+            console.log(err)
+        })
     }
     return(
         <>
@@ -30,7 +48,7 @@ const Items = ()=> {
             <div className="item-price">
                 {`Rs. ${item.discounted_price}`}
             </div>
-            <button type="button" onClick={handleCart}>Add To Cart</button>
+            <button type="button" onClick={()=> {handleCart(item)}}>Add To Cart</button>
             <button type="button" onClick={handleBuy}>Buy Now</button> 
         </div>
             )
